@@ -3,7 +3,7 @@ const buttonStop = document.querySelector('button[data-stop]');
 const body = document.querySelector("body");
 let timer = null;
 
-// buttonStop.setAttribute("disabled", "disabled");
+buttonStop.disabled = true;
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
@@ -11,16 +11,19 @@ function getRandomHexColor() {
 
 buttonStart.addEventListener("click", () => {
     buttonStart.disabled = true;
+    
     timer = setInterval(() => {
         body.style.backgroundColor = getRandomHexColor()
     }, 1000);
+
+    buttonStart.disabled = true;
     buttonStop.disabled = false;
 });
 
 
-
 buttonStop.addEventListener("click", () => {
-    clearInterval(timer);
     buttonStart.disabled = false;
+    buttonStop.disabled = true;
+    clearInterval(timer);
 })
 
